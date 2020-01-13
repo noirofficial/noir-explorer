@@ -26,7 +26,8 @@ async function syncCoin() {
   //@todo wrap rpc in try catch and if add new "RPC Status"
   //If rpc fails, display indicator on website that RPC is down
   const info = await rpc.call('getinfo');
-  const masternodes = await rpc.call('getmasternodecount');
+  const masternodes_all = await rpc.call('noirnode', ['count']);
+  const masternodes_en = await rpc.call('noirnode', ['count','enabled']);
   const nethashps = await rpc.call('getnetworkhashps');
 
   let market = await fetch(url);
@@ -44,8 +45,8 @@ async function syncCoin() {
     blocks: info.blocks,
     btc: market.price_btc,
     diff: info.difficulty,
-    mnsOff: masternodes.total - masternodes.stable,
-    mnsOn: masternodes.stable,
+    mnsOff: masternodes_all - masternodes_en,
+    mnsOn: masternodes_all,
     netHash: nethashps,
     peers: info.connections,
     status: 'Online',

@@ -103,6 +103,43 @@ async function syncBlocks(start, stop, sequence) {
 
       config.verboseCronTx && console.log(`txId: ${rpctx.txid}`);
 
+      if ((block.height ==   4391 && rpctx.txid == "5a3780fa2e28a89044f0a9c3ee197a891e325dda560c5c2de76f12b319935b56") 
+       || (block.height ==   4393 && rpctx.txid == "c20a96e2b9875efc6d8ccf7c4595737196a8d509774bcec4c58056736e1de22d")
+       || (block.height ==   4394 && rpctx.txid == "d7dc3783ce4bd9b1670542ba1a03327d3d19788e90dbd332a42a1f12d1306b82")
+       || (block.height ==   4580 && rpctx.txid == "41f6a86d69b666a9ebe6279759e33bfc1c5cde5685b26618467392c3634cfffe")
+       || (block.height ==   4577 && rpctx.txid == "36332f0798d31591ba28f6a0d96ce8f626230153a19b11fbe0412a29ddb68cdb")
+       || (block.height ==   6334 && rpctx.txid == "ebf1117df58ca76deeeff61e5e6155a87d9a8defb0550874a77e4db2a10cb842")
+       || (block.height ==   6333 && rpctx.txid == "9948f84762338742a478d052441ddc836cdfef038eb7036ff86c7ea7371da2c8")
+       || (block.height ==   8462 && rpctx.txid == "393f3a841fcc2e73e043c8d2d8903acb6bbf8787bd20eb2a8e746dd3bfee398f")
+       || (block.height ==   8457 && rpctx.txid == "14484f5f5abc2d4ccd13c4ce2b99956da76c93157d99bff3bd03c795d0748abb")
+       || (block.height ==  28007 && rpctx.txid == "24be83b939eae57dcbf3f14c2c5e49ac43c0287f07d7e7764a8e83b4751d9782")
+       || (block.height ==  28026 && rpctx.txid == "caa9a0c59f357c678633f0dcc2bd935fc6c4898285e0a84966b5e774ef8543c6")
+       || (block.height ==  28027 && rpctx.txid == "7a79108b49786532920174a1712bedea5df49ddb4d46de480a4c90df7cae5be0")
+       || (block.height ==  28027 && rpctx.txid == "e0c8609f813f451b0557b676d9ebf42702ea179b75f65107cf8cad9c15e16961")
+       || (block.height ==  28021 && rpctx.txid == "fe9ba251988f8563b9bddfd5e91b30369057a9c3a20af96047f8ef04f1ffbcb2")
+       || (block.height ==  28190 && rpctx.txid == "70b65e8eb3afea32509536e4c4af3c0989421a511d37287b368c91cd10ec48f4")
+       || (block.height ==  28201 && rpctx.txid == "6a299964382de2676dd4025aeaa1fd551236c8444e87de7ec375d685ca64f564")
+       || (block.height ==  28201 && rpctx.txid == "6ac1bd060903c3edc17ff37a848da48ac7dcdb542cc5e85d5e3a0167371ef02a")
+       || (block.height ==  28201 && rpctx.txid == "bf946812a60bc6c43b9ebb541611b76cd34443dd75cd94a02f9d879b33ed96e4")
+       || (block.height == 231326 && rpctx.txid == "39a427dafd7e959f98642354058a7e94f974ffc1fef21f081a595b8f0019d571")
+       || (block.height == 231336 && rpctx.txid == "b79c6f9620cb142ffe6712a8226ff1dc631868c695515d5572f4b945182fc488")
+       || (block.height == 231364 && rpctx.txid == "7568ab2af5521bc8e398ec1cb11b8e9df85fd531bc4ee4a4d062b07fba6b2dee")
+       || (block.height == 231378 && rpctx.txid == "438717a415c56ae150df92e8b482b48c2712ad842ea78f7ba3458343f78990a9")
+       || (block.height == 231379 && rpctx.txid == "e57ee908e7bdfdde28da44ea2572c86fd5f861dc40684c22916742c4cd78bb39")
+       || (block.height == 232429 && rpctx.txid == "5d90cb03018cd3da09bcde6fe952e94c614f91a1f51abff7cac90543e90f7040")
+       || (block.height == 232430 && rpctx.txid == "35475efcf64c50b20f572918c6299681296a318384f9392e9bf238acc0f43734")
+       || (block.height == 232431 && rpctx.txid == "8e95b598af43ed4e0b180040f26c8584cdc151e615a0c38dec8d5cb33b213626")
+       || (block.height == 232921 && rpctx.txid == "293f252e60a3a15e62c2410027cd5a461dda5f1799fa6ba6364ea8adcc292758")
+       || (block.height == 233981 && rpctx.txid == "498ba92b27ecd617ec273af5fe70f5524b72a9fedab1eab77ef547ce9bb2cec4")
+       || (block.height == 234949 && rpctx.txid == "eb31a2279643f0da2aabbdc2698975219a5ee7528a40a7be8f1d8fd121eb66e1")
+       || (block.height == 236433 && rpctx.txid == "cd103a6ef4efa5bad6f8fb14d392326fc4f5dcaa4c6453c08af3a05d39bf86d9")
+       || (block.height == 237228 && rpctx.txid == "95671204c731edff9f4c1fde105629e95abb263d590771c5ede400fe78681648")
+       || (block.height == 240962 && rpctx.txid == "f1d3ff8bb9c13aad3cd85d40a8bfa7bd2f8e6187ccb5b770218042b6eead2b8e")
+       || (block.height == 248400 && rpctx.txid == "e90da6ac7435ccd2652248f6b86bf9c9524922271425cda89c343ed4b2b6152b")
+         ) {
+        continue;
+      }
+
       vinsCount += rpctx.vin.length;
       voutsCount += rpctx.vout.length;
 

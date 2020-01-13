@@ -22,21 +22,39 @@ async function syncMasternode() {
 
   const date = moment().utc().startOf('minute').toDate();
 
-  const mns = await rpc.call('masternode', ['list']);
+  const mns = await rpc.call('noirnodelist', ['full']);
   const newMasternodes = [];
   const addressesToFetch = [];
-  for (const mn of mns) {
+  const mnsCount = Object.keys(mns).length;
+  console.log(mnsCount);
+  console.log(mns);
+  var counter = 0;
+  for (var i in mns) {
+    //console.log(i);
+    var str = mns[i];
+    var str2 = i;
+    counter++;
+    console.log('rank: ' + counter);
+    console.log('network: mainnet');
+    console.log('txHash: ' + str2.substr(10, 64).trim());
+    console.log('txOutIdx: ' + str2.substr(76, 1).trim());
+    console.log('status: ' + str.substr(0, 18).trim());
+    console.log('addr: ' + str.substr(25, 34).trim());
+    console.log('ver: ' + str.substr(19, 6).trim());
+    console.log('lastAt: ' + str.substr(60, 10).trim())
+    console.log('active: ' + str.substr(70, 10).trim())
+    console.log('lastPaidAt: ' + str.substr(80, 10).trim())
     const masternode = {
-      rank: mn.rank,
-      network: mn.network,
-      txHash: mn.txhash,
-      txOutIdx: mn.outidx, // @todo rename to outidx
-      status: mn.status,
-      addr: mn.addr,
-      ver: mn.version, //@todo rename to version
-      lastAt: new Date(mn.lastseen * 1000), // @todo rename to lastseen
-      active: mn.activetime, // @todo rename to activetime
-      lastPaidAt: new Date(mn.lastpaid * 1000), // @todo rename to lastpaidat
+      rank: counter,
+      network: "mainnet",
+      txHash: str2.substr(10, 64).trim(),
+      txOutIdx: str2.substr(76, 1).trim(), // @todo rename to outidx
+      status: str.substr(0, 18).trim(),
+      addr: str.substr(25, 34).trim(),
+      ver: str.substr(19, 6).trim(), //@todo rename to version
+      lastAt: new Date(str.substr(60, 10).trim() * 1000), // @todo rename to lastseen
+      active: str.substr(70, 10).trim(), // @todo rename to activetime
+      lastPaidAt: new Date(str.substr(80, 10).trim() * 1000), // @todo rename to lastpaidat
 
       createdAt: date,
     };

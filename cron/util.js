@@ -60,7 +60,7 @@ async function vin(rpctx, blockHeight) {
         vout: vin.vout
       };
 
-      /*
+      
       // Find the matching vout for vin and store extra metadata for vout
       if (vin.txid) {
         let shouldStoreRelatedVout = true;
@@ -87,7 +87,7 @@ async function vin(rpctx, blockHeight) {
           }
         }
       }
-      */
+      
 
       txin.push(vinDetails);
 
