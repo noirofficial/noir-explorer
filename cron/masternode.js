@@ -26,15 +26,15 @@ async function syncMasternode() {
   const newMasternodes = [];
   const addressesToFetch = [];
   const mnsCount = Object.keys(mns).length;
-  console.log(mnsCount);
-  console.log(mns);
+  /*console.log(mnsCount);
+  console.log(mns);*/
   var counter = 0;
   for (var i in mns) {
     //console.log(i);
     var str = mns[i];
     var str2 = i;
     counter++;
-    console.log('rank: ' + counter);
+    /*console.log('rank: ' + counter);
     console.log('network: mainnet');
     console.log('txHash: ' + str2.substr(10, 64).trim());
     console.log('txOutIdx: ' + str2.substr(76, 1).trim());
@@ -43,7 +43,7 @@ async function syncMasternode() {
     console.log('ver: ' + str.substr(19, 6).trim());
     console.log('lastAt: ' + str.substr(60, 10).trim())
     console.log('active: ' + str.substr(70, 10).trim())
-    console.log('lastPaidAt: ' + str.substr(80, 10).trim())
+    console.log('lastPaidAt: ' + str.substr(80, 10).trim())*/
     const masternode = {
       rank: counter,
       network: "mainnet",
