@@ -48,13 +48,6 @@ const getVinUtxos = async (rpctx) => {
       }
 
       const label = `${vin.txid}:${vin.vout}`;
-      if (   label == '5a3780fa2e28a89044f0a9c3ee197a891e325dda560c5c2de76f12b319935b56:0' 
-          || label == 'c20a96e2b9875efc6d8ccf7c4595737196a8d509774bcec4c58056736e1de22d:0'
-          || label == 'd7dc3783ce4bd9b1670542ba1a03327d3d19788e90dbd332a42a1f12d1306b82:0'
-          || label == '41f6a86d69b666a9ebe6279759e33bfc1c5cde5685b26618467392c3634cfffe:0'
-          || label == '36332f0798d31591ba28f6a0d96ce8f626230153a19b11fbe0412a29ddb68cdb:0') {
-        continue;
-      }
       utxoLabels.push(label);
     }
   }
@@ -233,13 +226,6 @@ const getRequiredMovement = async (params) => {
       const utxoLabel = `${vin.txid}:${vin.vout}`;
       const vinUtxo = vinUtxos.find(vinUtxo => vinUtxo.label === utxoLabel);
       if (!vinUtxo) {
-        if (   utxoLabel == '5a3780fa2e28a89044f0a9c3ee197a891e325dda560c5c2de76f12b319935b56:0' 
-            || utxoLabel == 'c20a96e2b9875efc6d8ccf7c4595737196a8d509774bcec4c58056736e1de22d:0'
-            || utxoLabel == 'd7dc3783ce4bd9b1670542ba1a03327d3d19788e90dbd332a42a1f12d1306b82:0'
-            || utxoLabel == '41f6a86d69b666a9ebe6279759e33bfc1c5cde5685b26618467392c3634cfffe:0'
-            || utxoLabel == '36332f0798d31591ba28f6a0d96ce8f626230153a19b11fbe0412a29ddb68cdb:0') {
-          continue;
-        }
         throw `UTXO not found: ${utxoLabel}`;
       }
       addToAddress(CarverAddressType.Address, vinUtxo.addressLabel, -vinUtxo.amount);
