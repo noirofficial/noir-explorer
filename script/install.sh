@@ -25,7 +25,7 @@ server {
 
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
-    #server_name explorer.bulwarkcrypto.com;
+    #server_name explorer.noirofficial.org;
     server_name _;
 
     gzip on;
@@ -51,21 +51,21 @@ server {
 
     #listen [::]:443 ssl ipv6only=on; # managed by Certbot
     #listen 443 ssl; # managed by Certbot
-    #ssl_certificate /etc/letsencrypt/live/explorer.bulwarkcrypto.com/fullchain.pem; # managed by Certbot
-    #ssl_certificate_key /etc/letsencrypt/live/explorer.bulwarkcrypto.com/privkey.pem; # managed by Certbot
+    #ssl_certificate /etc/letsencrypt/live/explorer.noirofficial.org/fullchain.pem; # managed by Certbot
+    #ssl_certificate_key /etc/letsencrypt/live/explorer.noirofficial.org/privkey.pem; # managed by Certbot
     #include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     #ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
 
 #server {
-#    if ($host = explorer.bulwarkcrypto.com) {
+#    if ($host = explorer.noirofficial.org) {
 #        return 301 https://\$host\$request_uri;
 #    } # managed by Certbot
 #
 #	listen 80 default_server;
 #	listen [::]:80 default_server;
 #
-#	server_name explorer.bulwarkcrypto.com;
+#	server_name explorer.noirofficial.org;
 #   return 404; # managed by Certbot
 #}
 EOL
@@ -87,47 +87,45 @@ installMongo () {
     clear
 }
 
-installBulwark () {
-    echo "Installing Bulwark..."
-    mkdir -p /tmp/bulwark
-    cd /tmp/bulwark
-    curl -Lo bulwark.tar.gz $bwklink
-    tar -xzf bulwark.tar.gz
-    sudo mv * /usr/local/bin
+installNoir () {
+    echo "Installing Noir..."
+    mkdir -p /tmp/noir
+    cd /tmp/noir
+    curl -Lo noir.zip $noirlink
+    unzip noir.zip
+    sudo mv ./* /usr/local/bin
     cd
-    rm -rf /tmp/bulwark
-    mkdir -p /home/explorer/.bulwark
-    cat > sudo /home/explorer/.bulwark/bulwark.conf << EOL
-rpcport=52544
+    rm -rf /tmp/noir
+    mkdir -p /home/explorer/.noir
+    cat > sudo /home/explorer/.noir/noir.conf << EOL
+rpcport=8256
 rpcuser=$rpcuser
 rpcpassword=$rpcpassword
 daemon=1
 txindex=1
 EOL
-    sudo cat > sudo /etc/systemd/system/bulwarkd.service << EOL
+    sudo cat > sudo /etc/systemd/system/noird.service << EOL
 [Unit]
-Description=bulwarkd
+Description=noird
 After=network.target
 [Service]
 Type=forking
 User=explorer
 WorkingDirectory=/home/explorer
-ExecStart=/usr/local/bin/bulwarkd -datadir=/home/explorer/.bulwark
-ExecStop=/usr/local/bin/bulwark-cli -datadir=/home/explorer/.bulwark stop
+ExecStart=/usr/local/bin/noird -datadir=/home/explorer/.noir
+ExecStop=/usr/local/bin/noir-cli -datadir=/home/explorer/.noird stop
 Restart=on-abort
 [Install]
 WantedBy=multi-user.target
 EOL
-    sudo systemctl start bulwarkd
-    sudo systemctl enable bulwarkd
-    echo "Sleeping for 1 hour while node syncs blockchain..."
-    sleep 1h
+    sudo systemctl start noird
+    sudo systemctl enable noird
     clear
 }
 
 installBlockEx () {
     echo "Installing BlockEx..."
-    git clone https://github.com/bulwark-crypto/bulwark-explorer.git /home/explorer/blockex
+    git clone https://github.com/noirofficial/noir-explorer.git /home/explorer/blockex
     cd /home/explorer/blockex
     yarn install
     cat > /home/explorer/blockex/config.server.js << EOL
@@ -144,8 +142,8 @@ const secretsConfig = {
   },
   rpc: {
     host: '127.0.0.1',
-    port: '52541',
-    user: 'bulwarkrpc',
+    port: '8256',
+    user: 'noirrpc',
     pass: 'someverysafepassword',
     timeout: 8000, // 8 seconds
   },
@@ -167,21 +165,21 @@ EOL
  */
 const config = {
   api: {
-    host: 'http://localhost', // ex: 'https://explorer.bulwarkcrypto.com' for nginx (SSL), 'http://IP_ADDRESS' 
+    host: 'http://localhost', // ex: 'https://explorer.noirofficial.org' for nginx (SSL), 'http://IP_ADDRESS' 
     port: '3000', // ex: Port 3000 on prod and localhost
     portWorker: '3000', // ex: Port 443 for production(ngingx) if you have SSL (we use certbot), 3000 on localhost or ip
     prefix: '/api',
     timeout: '5s'
   },
   coinDetails: {
-    name: 'Bulwark',
-    shortName: 'BWK',
+    name: 'Noir',
+    shortName: 'NOR',
     displayDecimals: 2,
-    longName: 'Bulwark Cryptocurrency',
+    longName: 'Noir',
     coinNumberFormat: '0,0.0000',
     coinTooltipNumberFormat: '0,0.0000000000', // Hovering over a number will show a larger percision tooltip
-    websiteUrl: 'https://bulwarkcrypto.com/',
-    masternodeCollateral: 5000 // MN ROI% gets based on this number. If your coin has multi-tiered masternodes then set this to lowest tier (ROI% will simply be higher for bigger tiers)
+    websiteUrl: 'https://noirofficial.org/',
+    masternodeCollateral: 25000 // MN ROI% gets based on this number. If your coin has multi-tiered masternodes then set this to lowest tier (ROI% will simply be higher for bigger tiers)
   },
   offChainSignOn: {
     enabled: true,
@@ -211,7 +209,7 @@ const config = {
       type: SocialType.Reddit, // What type of social widget is it?
       group: 'community', // Multiple social widget feeds can be combined into a single cross-app group feed
       options: {
-        subreddit: 'MyAwesomeCoin', // BulwarkCoin as an example
+        subreddit: 'MyAwesomeCoin', // Noir as an example
         query: 'flair:"Community"' // Show only posts with Community flair (the little tag next to post) (You can empty this to show all posts or specify your own filter based on https://www.reddit.com/wiki/search)
       }
     }
@@ -222,7 +220,7 @@ const config = {
   },
   coinMarketCap: {
     api: 'http://api.coinmarketcap.com/v1/ticker/',
-    ticker: 'bulwark'
+    ticker: 'noir'
   },
 
   /**
@@ -311,7 +309,7 @@ const config = {
       // Adds a new label metadata address
       carverAddressLabelWidget: {
         label: 'Proof Of Work Rewards ðŸ’Ž',
-        title: 'Bulwark started as a Proof Of Work & Masternode coin. Blocks would be mined by powerful computers and be rewarded for keeping up the network.'
+        title: 'Noir started as a Proof Of Work & Masternode coin. Blocks would be mined by powerful computers and be rewarded for keeping up the network.'
       }
     },
     'POS': {
@@ -412,10 +410,10 @@ clear
 
 # Variables
 echo "Setting up variables..."
-bwklink=`curl -s https://api.github.com/repos/bulwark-crypto/bulwark/releases/latest | grep browser_download_url | grep linux64 | cut -d '"' -f 4`
+noirlink=`curl -s https://api.github.com/repos/noirofficial/noir/releases/latest | grep browser_download_url | grep ubuntu | cut -d '"' -f 4`
 rpcuser=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 rpcpassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
-echo "Repo: $bwklink"
+echo "Repo: $noirlink"
 echo "PWD: $PWD"
 echo "User: $rpcuser"
 echo "Pass: $rpcpassword"
@@ -427,7 +425,7 @@ if [ ! -d "/home/explorer/blockex" ]
 then
     installNginx
     installMongo
-    #installBulwark
+    #installNoir
     installNodeAndYarn
     installBlockEx
     echo "Finished installation!"
