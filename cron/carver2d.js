@@ -15,7 +15,7 @@ const { UTXO } = require('../model/utxo');
  */
 const isPosTx = (tx) => {
 
-  return tx.vin.length === 1 &&
+  return tx.vin.length >= 1 &&
     tx.vin[0].txid !== undefined &&
     tx.vin[0].vout !== undefined &&
     tx.vout[0].value !== undefined &&
@@ -160,6 +160,9 @@ const fillAddressCache = async (params, usedAddresses) => {
  */
 const getRequiredMovement = async (params) => {
   const blockDate = new Date(params.rpcblock.time * 1000);
+  const blockHeight = params.rpcblock.height;
+
+  const masternodeRewardStartBlock = 262100;
 
   const rpctx = params.rpctx;
   const vinUtxos = params.vinUtxos;
@@ -206,7 +209,6 @@ const getRequiredMovement = async (params) => {
         console.log(tx);
         throw "COINBASE WITH >1 VIN?";
       }
-
       // Identify that this is a POW or POW/MN tx
       carverTxType = CarverTxType.ProofOfWork;
     } else if (vin.scriptSig && vin.scriptSig.asm == 'OP_ZEROCOINSPEND') {
@@ -270,12 +272,14 @@ const getRequiredMovement = async (params) => {
                   // Proof of Work Reward / Premine 
                   powAddressLabel = addressLabel;
                 } else {
-                  if (voutIndex === rpctx.vout.length - 1) { // Assume last tx is always POW reward
+                  if (voutIndex === rpctx.vout.length - rpctx.vout.length) { // first tx
                     // Proof of Work Reward
                     powAddressLabel = addressLabel;
-                  } else {
-                    // Masternode Reward / Governance 
-                    mnAddressLabel = addressLabel;
+                  } else if (voutIndex === rpctx.vout.length - 1){
+                    if (blockHeight >= masternodeRewardStartBlock){
+                      // Masternode Reward / Governance 
+                      mnAddressLabel = addressLabel;  
+                    }
                   }
                 }
                 break;
@@ -283,7 +287,7 @@ const getRequiredMovement = async (params) => {
                 if (voutIndex === rpctx.vout.length - 1) { // Assume last tx is always masternode reward
                   // Masternode Reward / Governance 
                   mnAddressLabel = addressLabel;
-                } else {
+                } else if (voutIndex === rpctx.vout.length - 4){
                   // Proof of Stake Reward
                   posAddressLabel = addressLabel;
                 }

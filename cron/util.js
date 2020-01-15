@@ -199,10 +199,15 @@ async function performDeepTxAnalysis(block, rpctx, txDetails) {
     const stakedInputConfirmations = stakedInputRawTx.confirmations - rpctx.confirmations; // How many confirmations did we get on staked input before the stake occured (subtract the new tx confirmations)
     const stakedInputTime = stakedInputRawTx.time;
 
+    console.log(rpctx.vout[1]);
+    console.log(rpctx.vout[2]);
+    console.log(rpctx.vout[3]);
+    console.log(rpctx.vout[4]);
+
     const stakeRewardAddress = rpctx.vout[1].scriptPubKey.addresses[0];
     const stakeRewardAmount = rpctx.vout[1].value - stakeInputValue;
-    const masternodeRewardAmount = rpctx.vout[2].value;
-    const masternodeRewardAddress = rpctx.vout[2].scriptPubKey.addresses[0];
+    const masternodeRewardAmount = rpctx.vout[4].value;
+    const masternodeRewardAddress = rpctx.vout[4].scriptPubKey.addresses[0];
 
     // Allows us to tell if we've staked on an output of a stake reward (staking a stake)
     const isRestake = blockchain.isRewardRawTransaction(stakedInputRawTx);

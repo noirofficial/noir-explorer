@@ -533,6 +533,8 @@ const getTX = async (req, res) => {
   try {
     const hash = req.params.hash;
 
+    const masternodeRewardStartBlock = 262100;
+
     const carverMovement = await CarverMovement
       .findOne({ txId: hash }, { sequence: 0 })
       .populate({ path: 'blockRewardDetails' });
@@ -543,7 +545,7 @@ const getTX = async (req, res) => {
     }
     const carverAddressMovements = await CarverAddressMovement.find({ carverMovement: carverMovement._id }, { sequence: 0 }).populate('carverAddress', { carverAddressType: 1, label: 1, carverMovement: 1 });
 
-
+    const height = carverAddressMovements[0].blockHeight;
 
     let txDetails = {
       ...carverMovement.toObject(),
@@ -553,8 +555,10 @@ const getTX = async (req, res) => {
     if (carverMovement.isReward) {
       const blockRewardDetails = carverMovement.blockRewardDetails;
 
-      const masternodeAddress = await CarverAddress.findOne({ label: `${blockRewardDetails.masternode.addressLabel}:MN` }, { countOut: 1, valueOut: 1 });
-      txDetails.blockRewardDetails.masternode.rewardsCarverAddress = masternodeAddress;
+      if (height >= masternodeRewardStartBlock){
+        const masternodeAddress = await CarverAddress.findOne({ label: `${blockRewardDetails.masternode.addressLabel}:MN` }, { countOut: 1, valueOut: 1 });
+        txDetails.blockRewardDetails.masternode.rewardsCarverAddress = masternodeAddress;  
+      }
 
       switch (carverMovement.txType) {
         case CarverTxType.ProofOfStake:
