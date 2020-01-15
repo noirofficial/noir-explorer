@@ -31,7 +31,7 @@ class Footer extends Component {
         <div className="footer__block">
           <img className="footer__logo" src="/img/footerlogo.svg" />
           <span className="footer__legal">
-            <div>Copyright &copy; 2018 - {currentYear} <a href={config.coinDetails.websiteUrl} target="_blank" rel="nofollow noopener">{config.coinDetails.longName}</a></div>
+            <div>Copyright &copy; 2020 - {currentYear} <a href={config.coinDetails.websiteUrl} target="_blank" rel="nofollow noopener">{config.coinDetails.longName}</a></div>
 
             <div>Bulwark Explorer &copy; 2018 - {currentYear} <a href="https://bulwarkcrypto.com/" target="_blank" rel="nofollow noopener">Bulwark Cryptocurrency</a></div>
           </span>
@@ -65,16 +65,16 @@ class Footer extends Component {
               <a href="https://discord.gg/a7vhegP" target="_blank" rel="nofollow noopener">
                 <Icon name="discord" className="fab footer__social-media-icon" />
               </a>
-              <a href="https://t.me/bulwarkcrypto" target="_blank" rel="nofollow noopener">
+              <a href="https://t.me/noircommunity" target="_blank" rel="nofollow noopener">
                 <Icon name="telegram" className="fab footer__social-media-icon" />
               </a>
-              <a href="https://www.reddit.com/r/BulwarkCoin/" target="_blank" rel="nofollow noopener">
+              <a href="https://old.reddit.com/r/Noirofficial/" target="_blank" rel="nofollow noopener">
                 <Icon name="reddit" className="fab footer__social-media-icon" />
               </a>
-              <a href="https://github.com/bulwark-crypto" target="_blank" rel="nofollow noopener">
+              <a href="https://github.com/noirofficial" target="_blank" rel="nofollow noopener">
                 <Icon name="github" className="fab footer__social-media-icon" />
               </a>
-              <a href="https://twitter.com/BulwarkCrypto" target="_blank" rel="nofollow noopener">
+              <a href="https://twitter.com/Noircoin" target="_blank" rel="nofollow noopener">
                 <Icon name="twitter" className="fab footer__social-media-icon" />
               </a>
             </div>
