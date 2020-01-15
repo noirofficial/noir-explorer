@@ -275,7 +275,7 @@ const getRequiredMovement = async (params) => {
                   if (voutIndex === rpctx.vout.length - rpctx.vout.length) { // first tx
                     // Proof of Work Reward
                     powAddressLabel = addressLabel;
-                  } else if (voutIndex === rpctx.vout.length - 1){
+                  } else if (voutIndex === 1){
                     if (blockHeight >= masternodeRewardStartBlock){
                       // Masternode Reward / Governance 
                       mnAddressLabel = addressLabel;  

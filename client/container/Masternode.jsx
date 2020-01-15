@@ -18,16 +18,16 @@ class Masternode extends Component {
         <div className="row">
           <div className="col-md-12 col-lg-6">
             <HorizontalRule
-              title="Average Masternode Payment" />
+              title="Average Noirnode Payment" />
             <ChartComponent type={TimeIntervalType.DailyAvgMasternodeAge} />
           </div>
           <div className="col-md-12 col-lg-6">
             <HorizontalRule
-              title="Average Daily Masternode ROI%" />
+              title="Average Daily Noirnode ROI%" />
             <ChartComponent type={TimeIntervalType.DailyAvgMasternodeRoi} />
           </div>
         </div>
-        <MasternodesList title="Masternodes" isPaginationEnabled={true} getMNs={this.props.getMNs} />
+        <MasternodesList title="Noirnodes" isPaginationEnabled={true} getMNs={this.props.getMNs} />
       </div>
     );
   };
