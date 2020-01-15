@@ -49,12 +49,12 @@ export default class CardStatus extends Component {
           <div className="card__row justify-content-between">
             <span className="card__label">Blocks:</span>
             <span className="card__result">
-              <Link to={`/block/${this.props.blocks}`}>
+              <Link to={`/block/${this.props.coin.blocks}`}>
                 <b>
                   <CountUp
                     decimals={0}
                     duration={1}
-                    end={this.props.blocks}
+                    end={this.props.coin.blocks}
                     start={0} />
                 </b>
               </Link>
