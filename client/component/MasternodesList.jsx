@@ -32,7 +32,7 @@ class MasternodesList extends Component {
       cols: [
         { key: 'lastPaidAt', title: 'Last Paid' },
         { key: 'addr', title: 'Address' },
-        { key: 'activeMns', title: 'Masternodes' },
+        { key: 'activeMns', title: 'Noirnodes' },
         { key: 'created', title: 'Created' },
         //{ key: 'txHash', title: 'Collateral TX' },
         //{ key: 'txOutIdx', title: 'Index' },

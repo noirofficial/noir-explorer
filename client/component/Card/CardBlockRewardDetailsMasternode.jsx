@@ -23,15 +23,15 @@ export default class CardBlockRewardDetailsMasternode extends Component {
         <div className="animated fadeIn">
           <div className="card--block">
             <div className="card__row">
-              <span className="card__label">Masternode ROI%:</span>
+              <span className="card__label">Noirnode ROI%:</span>
               <span className="card__result">{numeral(blockRewardDetails.masternode.roi).format(config.coinDetails.coinNumberFormat)}% / year</span>
             </div>
             <div className="card__row">
-              <span className="card__label">Masternode Reward:</span>
+              <span className="card__label">Noirnode Reward:</span>
               <span className="card__result">{numeral(blockRewardDetails.masternode.reward).format(config.coinDetails.coinNumberFormat)} {config.coinDetails.shortName}</span>
             </div>
             <div className="card__row mt-3">
-              <span className="card__label">Masternode Address:</span>
+              <span className="card__label">Noirnode Address:</span>
               <span className="card__result"><Link to={`/address/${blockRewardDetails.masternode.addressLabel}`}>{blockRewardDetails.masternode.addressLabel}</Link></span>
             </div>
             <div className="card__row">
@@ -43,7 +43,7 @@ export default class CardBlockRewardDetailsMasternode extends Component {
               <span className="card__result"><Link to={`/address/${blockRewardDetails.masternode.addressLabel}`}>{numeral(blockRewardDetails.masternode.rewardsCarverAddress.valueOut).format(config.coinDetails.coinNumberFormat)} {config.coinDetails.shortName}</Link></span>
             </div>
             <div className="card__row">
-              <span className="card__label">Masternode Return:</span>
+              <span className="card__label">Noirnode Return:</span>
               <span className="card__result"><Link to={`/address/${blockRewardDetails.masternode.addressLabel}`}>+{masternodeLifetimeRoi.toFixed(2)} %</Link></span>
             </div>
           </div>

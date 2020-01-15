@@ -30,7 +30,7 @@ export default class CardMasternodeSummary extends Component {
       <div className="animated fadeInUp">
         <Card
           className="card--graph"
-          title="Masternodes">
+          title="Noirnodes">
           <p className="card__data-main">
             <CountUp
               decimals={0}
@@ -38,7 +38,7 @@ export default class CardMasternodeSummary extends Component {
               end={total}
               start={0} />
           </p>
-          <p className="card__data-sub">Online: {this.props.online}</p>
+          <p className="card__data-sub">Online: {this.props.online} (ENABLED + NEW_START_REQUIRED)</p>
           <GraphLine
             color="#1991eb"
             className="card__graph"
