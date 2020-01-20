@@ -59,10 +59,10 @@ class Footer extends Component {
           <div className="footer__social-media-wrapper">
             <div className="footer__social-title">Social Media</div>
             <div>
-              <a href="https://bitcointalk.org/index.php?topic=2499481.0" target="_blank" rel="nofollow noopener">
+              <a href="https://bitcointalk.org/index.php?topic=5210506" target="_blank" rel="nofollow noopener">
                 <Icon name="bitcoin" className="fab footer__social-media-icon" />
               </a>
-              <a href="https://discord.gg/a7vhegP" target="_blank" rel="nofollow noopener">
+              <a href="https://discord.gg/J3qquSz" target="_blank" rel="nofollow noopener">
                 <Icon name="discord" className="fab footer__social-media-icon" />
               </a>
               <a href="https://t.me/noircommunity" target="_blank" rel="nofollow noopener">
