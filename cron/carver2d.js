@@ -46,7 +46,6 @@ const getVinUtxos = async (rpctx) => {
         console.log(vin);
         throw 'VIN TXID WITHOUT VOUT?';
       }
-
       const label = `${vin.txid}:${vin.vout}`;
       utxoLabels.push(label);
     }
@@ -57,7 +56,7 @@ const getVinUtxos = async (rpctx) => {
   if (utxos.length !== utxoLabels.length) {
     console.log(utxoLabels);
     console.log(utxos);
-    console.log(rpctx);
+    //console.log(rpctx);
     throw 'UTXO count mismatch'
   }
 
