@@ -91,8 +91,8 @@ class Overview extends Component {
 
     return (
       <div>
-        {getSocialFeed()}
-        {/*getLatestTxs()*/}
+        {/*getSocialFeed()*/}
+        {getLatestTxs()}
       </div>
     );
   };
